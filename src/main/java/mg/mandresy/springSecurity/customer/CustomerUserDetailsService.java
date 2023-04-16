@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class CustomerUserDetailsService implements UserDetailsService {
-    private final CustomerDao customerDao;
+    private final CustomerService customerService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return customerDao.selectUserByEmail(username)
+        return customerService.selectUserByEmail(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("Username " + username + " not found")
                 );

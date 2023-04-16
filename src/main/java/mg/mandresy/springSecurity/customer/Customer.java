@@ -12,19 +12,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(
-        name = "customer",
+@Table(name = "customer",
         uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "customer_email_unique",
-                        columnNames = "email"
-                ),
-                @UniqueConstraint(
-                        name = "profile_image_id_unique",
-                        columnNames = "profileImageId"
-                )
-        }
-)
+            @UniqueConstraint(name = "customer_email_unique", columnNames = {"email"}),
+            @UniqueConstraint(name = "profile_image_id_unique", columnNames = {"profileImageId"})
+        })
 @Getter
 @Setter
 public class Customer implements UserDetails {
@@ -34,40 +26,26 @@ public class Customer implements UserDetails {
             sequenceName = "customer_id_seq",
             allocationSize = 1
     )
-    @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_seq")
     private Integer id;
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String name;
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String email;
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private Integer age;
 
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String password;
 
-    @Column(
-            unique = true
-    )
+    @Column(unique = true)
     private String profileImageId;
 
-    public Customer() {
-    }
+    public Customer() {}
 
     public Customer(Integer id,
                     String name,
